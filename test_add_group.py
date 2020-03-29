@@ -1,6 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-
+from group import Group
 
 class TestCreatenewgroup():
   def setup_method(self, method):
@@ -14,7 +14,7 @@ class TestCreatenewgroup():
     self.open_home_page()
     self.login(username="admin", password="secret")
     self.open_group_page()
-    self.create_group(name="ggg43g34g43g34", header="g34g43g43g43", footer="egwgegewgwegwe")
+    self.create_group(Group(name="ggg43g34g43g34", header="g34g43g43g43", footer="egwgegewgwegwe"))
     self.return_to_group_page()
     self.logout()
 
@@ -22,7 +22,7 @@ class TestCreatenewgroup():
     self.open_home_page()
     self.login(username="admin", password="secret")
     self.open_group_page()
-    self.create_group(name="", header="", footer="")
+    self.create_group(Group(name="", header="", footer=""))
     self.return_to_group_page()
     self.logout()
 
@@ -32,16 +32,16 @@ class TestCreatenewgroup():
   def return_to_group_page(self):
     self.driver.find_element(By.LINK_TEXT, "group page").click()
 
-  def create_group(self, name, header, footer):
+  def create_group(self, group):
     # init group creation
     self.driver.find_element(By.NAME, "new").click()
     # fill group form
     self.driver.find_element(By.NAME, "group_name").click()
-    self.driver.find_element(By.NAME, "group_name").send_keys(name)
+    self.driver.find_element(By.NAME, "group_name").send_keys(group.name)
     self.driver.find_element(By.NAME, "group_header").click()
-    self.driver.find_element(By.NAME, "group_header").send_keys(header)
+    self.driver.find_element(By.NAME, "group_header").send_keys(group.header)
     self.driver.find_element(By.NAME, "group_footer").click()
-    self.driver.find_element(By.NAME, "group_footer").send_keys(footer)
+    self.driver.find_element(By.NAME, "group_footer").send_keys(group.footer)
     # submit group creation
     self.driver.find_element(By.NAME, "submit").click()
 
