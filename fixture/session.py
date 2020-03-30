@@ -15,3 +15,4 @@ class SessionHelper:
 
     def logout(self):
         self.app.driver.find_element(By.LINK_TEXT, "Logout").click()
+
