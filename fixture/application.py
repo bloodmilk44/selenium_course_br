@@ -1,7 +1,8 @@
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 from fixture.session import SessionHelper
 from fixture.group import GroupHelper
+from fixture.contact import ContactHelper
+
 
 class Application:
 
@@ -11,6 +12,7 @@ class Application:
         self.vars = {}
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
+        self.contact = ContactHelper(self)
 
     def is_valid(self):
         try:
