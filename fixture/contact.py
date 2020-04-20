@@ -7,14 +7,13 @@ class ContactHelper:
     def __init__(self, app):
         self.app = app
 
+
     def change_field_value(self, field_name, text):
         if text is not None:
             self.app.driver.find_element(By.NAME, field_name).click()
             self.app.driver.find_element(By.NAME, field_name).send_keys(text)
 
     contact_cache = None
-
-
 
 
     def get_contact_list(self):
@@ -26,7 +25,7 @@ class ContactHelper:
                 firstname = cells[1].text
                 lastname = cells[2].text
                 id2 = cells[0].find_element(By.TAG_NAME, "input").get_attribute("value")
-                all_phones = self[5].text.splitlines()
+                all_phones = cells[5].text.splitlines()
                 self.contact_cache.append(Contact(firstname=firstname, lastname=lastname, id=id2,
                                                   homephone=all_phones[0], mobilephone=all_phones[1],
                                                   workphone=all_phones[2], secondaryphone=all_phones[3]))
