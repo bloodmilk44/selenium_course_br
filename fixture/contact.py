@@ -26,10 +26,9 @@ class ContactHelper:
                 firstname = cells[1].text
                 lastname = cells[2].text
                 id2 = cells[0].find_element(By.TAG_NAME, "input").get_attribute("value")
-                all_phones = cells[5].text.splitlines()
+                all_phones = cells[5].text
                 self.contact_cache.append(Contact(firstname=firstname, lastname=lastname, id=id2,
-                                                  homephone=all_phones[0], mobilephone=all_phones[1],
-                                                  workphone=all_phones[2], secondaryphone=all_phones[3]))
+                                                  all_phones_from_home_page=all_phones))
         return list(self.contact_cache)
 
     def open_contact_to_edit_by_index(self, index):
@@ -42,7 +41,7 @@ class ContactHelper:
         self.app.open_home_page()
         row = self.app.driver.find_elements(By.NAME, "entry")[index]
         cell = row.find_elements(By.TAG_NAME, "td")[6]
-        cell.find_elements(By.TAG_NAME, "a").click()
+        cell.find_element(By.TAG_NAME, "a").click()
 
     def get_contact_info_from_edit_page(self, index):
         self.open_contact_to_edit_by_index(index)
