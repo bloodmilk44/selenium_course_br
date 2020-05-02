@@ -44,9 +44,9 @@ class GroupHelper:
         self.modify_group_by_index(0)
 
 
-    def delete_group_by_index(self, index):
+    def delete_group_by_id(self, id):
         self.open_group_page()
-        self.select_group_by_index(index)
+        self.select_group_by_id(id)
         # submit delete
         self.app.driver.find_element(By.NAME, "delete").click()
         self.return_to_group_page()
@@ -58,6 +58,10 @@ class GroupHelper:
 
     def select_group_by_index(self, index):
         self.app.driver.find_elements(By.NAME, "selected[]")[index].click()
+
+    def select_group_by_id(self, id):
+        self.app.driver.find_element(By.CSS_SELECTOR, "input[value='%s']" % id).click()
+
 
     def modify_group_by_index(self, index, new_group_data):
         self.open_group_page()
@@ -89,4 +93,12 @@ class GroupHelper:
                 self.group_cache.append(Group(name=text, id=id))
         return list(self.group_cache)
 
+
+    def delete_group_by_index(self, index):
+        self.open_group_page()
+        self.select_group_by_index(index)
+        # submit delete
+        self.app.driver.find_element(By.NAME, "delete").click()
+        self.return_to_group_page()
+        self.group_cache = None
 
